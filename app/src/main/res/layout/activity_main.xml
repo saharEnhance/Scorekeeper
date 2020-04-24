@@ -42,6 +42,7 @@
 
         <TextView
             android:id="@+id/score_1"
+            style="@style/ScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -49,6 +50,7 @@
 
         <TextView
             android:id="@+id/texteam1"
+            style="@style/TeamText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -87,14 +89,18 @@
             android:contentDescription="@string/minus_button_description"
             android:onClick="decreaseScore"
             android:src="@drawable/ic_minus" />
+
         <TextView
             android:id="@+id/score_2"
+            style="@style/ScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="0" />
+
         <TextView
             android:id="@+id/textTeam2"
+            style="@style/TeamText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
