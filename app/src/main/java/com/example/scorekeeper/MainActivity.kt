@@ -2,9 +2,12 @@ package com.example.scorekeeper
 
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Handles the onClick of both the decrement buttons.
+     *
+     * @param view The button view that was clicked
+     */
     fun decreaseScore(view: View) {
         // Get the ID of the button that was clicked.
         val viewID = view.id
@@ -51,6 +59,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Handles the onClick of both the increment buttons.
+     *
+     * @param view The button view that was clicked
+     */
     fun increaseScore(view: View) {
         // Get the ID of the button that was clicked.
         val viewID = view.id
@@ -67,6 +80,48 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        // Change the label of the menu based on the state of the app.
+        val nightMode = AppCompatDelegate.getDefaultNightMode()
+        if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            if (menu != null) {
+                menu.findItem(R.id.night_mode).setTitle(R.string.day_mode)
+            }
+        } else {
+            if (menu != null) {
+                menu.findItem(R.id.night_mode).setTitle(R.string.night_mode)
+            }
+        }
+        return true
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        // Check if the correct item was clicked.
+        if (item!!.getItemId() == R.id.night_mode) {
+            // Get the night mode state of the app.
+            val nightMode = AppCompatDelegate.getDefaultNightMode()
+            // Set the theme mode for the restarted activity.
+            if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            // Recreate the activity for the theme change to take effect.
+            recreate()
+        }
+        return true
+    }
+
+    /**
+     * Method that is called when the configuration changes,
+     * used to preserve the state of the app.
+     *
+     * @param outState The bundle that will be passed in to the Activity when it is restored.
+     */
     protected override fun onSaveInstanceState(outState: Bundle) {
         // Save the scores.
         outState.putInt(MainActivity.Companion.STATE_SCORE_1, mScore1)
